@@ -1,0 +1,1 @@
+bibliotecas estáticas .a
