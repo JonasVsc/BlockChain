@@ -1,6 +1,6 @@
 #include<iostream>
 
-const int difficulty = 0;
+const std::string difficulty = "0000";
 
 class Block {
 public:
@@ -13,14 +13,15 @@ public:
     
     std::string getData();
     std::string getHash();
-    std::string getStatus();
+    int getStatus();
 
     void setData(const std::string &data_);
 
 private:
-    int nonce, index;
+    int nonce, index, status;
     std::string hash;
     std::string data;
 
     void setHash(const std::string &data_);
+    void setStatus(int st);
 };

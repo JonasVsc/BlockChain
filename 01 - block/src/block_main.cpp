@@ -6,15 +6,24 @@
 int main() {
     Block block;
     char option;
-    std::string data;
+    std::string data, status;
 
     
     while(true)
     {
+        if(block.getStatus() == 0)
+        {
+            status = "Not Mined!";
+        }
+        if(block.getStatus() == 1)
+        {
+            status = "Mined!";
+        }
+        
 
         std::cout
         << "=====================================================================================\n\n"
-        << "STATUS: " << block.getStatus() << "\n\n"
+        << "STATUS: " << status << "\n\n"
         << "Bloco : " << block.getIndex() << "\n\n"
         << "Nonce : " << block.getNonce() << "\n\n"
         << "Dados : " << block.getData() << "\n\n"
@@ -43,7 +52,9 @@ int main() {
         }
         if(option == '2')
         {
-
+            std::cout << "Mining...\n";
+            block.mine();
+            system("pause");
         }
 
         system("cls");
