@@ -1,44 +1,41 @@
-#include <iostream>
-#include <iomanip>
-#include <openssl/evp.h>
+#include"hash.h"
 
-std::string sha256(const std::string& input) {
-    EVP_MD_CTX *mdctx;
-    const EVP_MD *md;
-    unsigned char hash[EVP_MAX_MD_SIZE];
-    unsigned int hash_len;
+std::string sha256(const std::string& input);
 
-    OpenSSL_add_all_digests();
-    md = EVP_get_digestbyname("sha256");
-
-    if (!md) {
-        std::cerr << "Erro ao obter o algoritmo SHA-256" << std::endl;
-        return "";
-    }
-
-    mdctx = EVP_MD_CTX_new();
-    EVP_DigestInit_ex(mdctx, md, nullptr);
-    EVP_DigestUpdate(mdctx, input.c_str(), input.length());
-    EVP_DigestFinal_ex(mdctx, hash, &hash_len);
-    EVP_MD_CTX_free(mdctx);
-
-    // Convertendo o hash para uma string hexadecimal
-    std::stringstream ss;
-    for (unsigned int i = 0; i < hash_len; i++) {
-        ss << std::hex << std::setw(2) << std::setfill('0') << (int)hash[i];
-    }
-
-    return ss.str();
-}
 
 int main() {
-    std::string input;
-    std::cout << "Digite a string a ser transformada em hash: ";
-    std::getline(std::cin, input);
+    char option;
+    std::string data;
+    while(true)
+    {
+        std::string hashed = sha256(data);
+        std::cout
+        << "\n\n========================\n"
+        << "DATA: " << data << std::endl
+        << "SHA256: " << hashed << std::endl
+        << "========================\n\n";
 
-    std::string hashed = sha256(input);
+        std::cout
+        << "\n\nOptions:\n"
+        << "[0] - Sair\n"
+        << "[1] - Inserir dados\n";
+        std::cin >> option;
+        std::cout << "\n\n";
 
-    std::cout << "Hash SHA-256: " << hashed << std::endl;
+        if(option == '0')
+        {
+            return 0;
+        }
+        if(option == '1')
+        {
+            std::cout << "Data: ";
+            std::cin >> data;
+            std::string hashed = sha256(data);
+            std::cout << "\n\n";
+        }
+        system("cls");
+    }
+
     system("pause");
     return 0;
 }
