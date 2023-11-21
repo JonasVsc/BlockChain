@@ -1,6 +1,4 @@
-#include <iostream>
-#include <iomanip>
-#include <openssl/evp.h>
+#include"hash.h"
 
 std::string sha256(const std::string& input) {
     EVP_MD_CTX *mdctx;
