@@ -11,12 +11,19 @@ int main() {
     while(true)
     {
 
-        blockchain.printBlockchain();
+        std::cout
+        << "# [" << blockchain.selected->index << "] " << '\n'
+        << "Nonce " << blockchain.selected->nonce << " " << "\n\n"
+        << "Data: " << blockchain.selected->data << "\n\n"
+        << "Hash: " << blockchain.selected->hash << '\n'
+        << "PrevHash: " << (blockchain.selected != blockchain.genesis ? blockchain.selected->prev->hash : "0000") << "\n\n"
+        << "===========================================================================" << "\n\n";
 
         std::cout 
         << "[0] -> Sair" << '\n'
         << "[1] -> Inserir Dados" << '\n'
-        << "[2] -> Minerar" << '\n';
+        << "[2] -> Minerar" << '\n'
+        << "[3] -> Listar Blocos" << '\n';
         std::cin >> option;
         
         switch (option)
@@ -33,6 +40,11 @@ int main() {
         case '2':
             system("cls");
             blockchain.mine();
+            break;
+        case '3':
+            system("cls");
+            blockchain.printBlockchain();
+            system("pause");
             break;
         default:
             break;
