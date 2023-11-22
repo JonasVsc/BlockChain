@@ -82,11 +82,6 @@ void Blockchain::mine()
     }
     selected->nonce = nonce_;
     selected->hash = validHash;
-
-    if(selected == actual)
-    {
-        newBlock();
-    }
 }
 
 void Blockchain::setTimestamp()
