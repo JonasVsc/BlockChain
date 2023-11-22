@@ -6,6 +6,8 @@ include_directories("./include")
 add_library(hash_lib "./lib/hash.cpp")
 add_library(blockchain_lib "./lib/blockchain.cpp")
 target_link_libraries(hash_lib ssl crypto)
+target_link_libraries(blockchain_lib hash_lib)
+
 
 set(EXECUTABLE_OUTPUT_PATH "../bin")
 

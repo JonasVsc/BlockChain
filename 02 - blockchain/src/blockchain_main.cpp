@@ -5,17 +5,31 @@ int main() {
     
     Blockchain blockchain;
     char option;
-    std::string data;
+    std::string data, status, nonce_time;
+    std::time_t timestamp;
 
     while(true)
     {
+        if(blockchain.actual->status == Invalido)
+        {
+            status = "Invalido"; 
+            nonce_time = "";
+        }
+        if(blockchain.actual->status == Valido)
+        {
+            status = "Valido";
+            timestamp = blockchain.actual->timestamp;
+            nonce_time = std::asctime(std::localtime(&timestamp));
+        }
+
+
         std::cout
-        << "# [" << blockchain.actual->index << "] " << "STATUS" << "\n\n"
-        << "Nonce " << blockchain.actual->nonce << " - " << blockchain.getGenesisTimestamp() << '\n'
+        << "# [" << blockchain.actual->index << "] " << status << "\n\n"
+        << "Nonce " << blockchain.actual->nonce << " " << nonce_time << '\n'
         << "Data: " << blockchain.actual->data << "\n\n"
-        << "Hash: " << "ab88d76aa9deef9f72" << '\n'
-        << "PrevHash: " << "ab88d76aa9deef9f72" << '\n'
-        << "===========================================" << "\n\n";
+        << "Hash: " << blockchain.actual->hash << '\n'
+        << "PrevHash: " << blockchain.actual->prevHash << "\n\n"
+        << "===========================================================================" << "\n\n";
 
 
         std::cout 
@@ -34,6 +48,11 @@ int main() {
             std::cin.ignore();
             std::getline(std::cin , data);
             blockchain.setData(data);
+            break;
+        case '2':
+            system("cls");
+            blockchain.mine();
+            break;
         default:
             break;
         }
