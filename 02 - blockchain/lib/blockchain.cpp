@@ -17,3 +17,8 @@ std::string Blockchain::getGenesisTimestamp()
     std::time_t timestamp = genesis->timestamp;
     return (std::asctime(std::localtime(&timestamp)));
 }
+
+void Blockchain::setData(const std::string &d)
+{
+    actual->data = d;
+}

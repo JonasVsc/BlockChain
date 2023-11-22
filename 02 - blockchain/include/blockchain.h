@@ -3,6 +3,8 @@
 class Blockchain {
     public:
         Blockchain();
+        std::string getGenesisTimestamp();
+        void setData(const std::string &d);
         
 
 
@@ -10,5 +12,4 @@ class Blockchain {
         Block* actual;
     private:
 
-        std::string getGenesisTimestamp();
 };
