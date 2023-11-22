@@ -10,7 +10,7 @@ Blockchain::Blockchain()
     block->data = "";
     block->next = nullptr;
     block->prev = nullptr;
-    block->hash = sha256(block->data + std::to_string(block->nonce));
+    block->hash = sha256(block->data + std::to_string(block->nonce) + std::to_string(block->index));
     
     genesis = actual = selected = block;
 }
@@ -39,7 +39,7 @@ void Blockchain::printBlockchain()
         << "Nonce " << temp->nonce << " " << "\n\n"
         << "Data: " << temp->data << "\n\n"
         << "Hash: " << temp->hash << '\n'
-        << "PrevHash: " << (temp != genesis ? temp->prev->hash : "0000") << "\n\n"
+        << "PrevHash: " << (temp != genesis ? temp->prev->hash : "000000000000") << "\n\n"
         << "===========================================================================" << "\n\n";
         temp = temp->next;
     }
@@ -56,7 +56,7 @@ void Blockchain::newBlock()
     block->data = "";
     block->next = nullptr;
     block->prev = actual;
-    block->hash = sha256(block->data + std::to_string(block->nonce));
+    block->hash = sha256(block->data + std::to_string(block->nonce) + std::to_string(block->index));
     block->prevHash = block->prev->hash;
     actual->next = block;
     actual = block;
@@ -69,7 +69,7 @@ void Blockchain::mine()
 
     while(true)
     {
-        validHash = sha256(selected->data + std::to_string(nonce_));
+        validHash = sha256(selected->data + std::to_string(nonce_) + std::to_string(selected->index));
         std::cout << validHash << '\n';
         int result = validHash.compare(0, 4, difficulty);
         if(result == 0)

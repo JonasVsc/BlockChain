@@ -16,14 +16,15 @@ int main() {
         << "Nonce " << blockchain.selected->nonce << " " << "\n\n"
         << "Data: " << blockchain.selected->data << "\n\n"
         << "Hash: " << blockchain.selected->hash << '\n'
-        << "PrevHash: " << (blockchain.selected != blockchain.genesis ? blockchain.selected->prev->hash : "0000") << "\n\n"
+        << "PrevHash: " << (blockchain.selected != blockchain.genesis ? blockchain.selected->prev->hash : "000000000000") << "\n\n"
         << "===========================================================================" << "\n\n";
 
         std::cout 
         << "[0] -> Sair" << '\n'
         << "[1] -> Inserir Dados" << '\n'
         << "[2] -> Minerar" << '\n'
-        << "[3] -> Listar Blocos" << '\n';
+        << "[3] -> Listar Blocos" << '\n'
+        << "[4] -> Adicionar Bloco" << '\n';
         std::cin >> option;
         
         switch (option)
@@ -46,6 +47,11 @@ int main() {
             blockchain.printBlockchain();
             system("pause");
             break;
+        case '4':
+            system("cls");
+            std::cout << "Novo bloco criado!\n\n";
+            blockchain.newBlock();
+            system("pause");
         default:
             break;
         }
