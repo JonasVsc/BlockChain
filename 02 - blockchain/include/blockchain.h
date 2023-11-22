@@ -11,13 +11,13 @@ class Blockchain {
         std::string getGenesisTimestamp();
         void setTimestamp();
         void setData(const std::string &d);
-        void setHash(const std::string &d);
         void printBlockchain();
         void mine();
         void newBlock();
 
         Block* genesis;
         Block* actual;
+        Block* selected;
     private:
 
 };

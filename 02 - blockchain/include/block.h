@@ -7,5 +7,6 @@ struct Block {
     int index, nonce, status;
     std::time_t timestamp;
     std::string data, hash, prevHash;
-    Block* link;
+    Block* next;
+    Block* prev;
 };
