@@ -5,6 +5,7 @@ int main() {
     
     Blockchain blockchain;
     char option;
+    int index;
     std::string data, status, nonce_time;
     std::time_t timestamp;
 
@@ -24,7 +25,8 @@ int main() {
         << "[1] -> Inserir Dados" << '\n'
         << "[2] -> Minerar" << '\n'
         << "[3] -> Listar Blocos" << '\n'
-        << "[4] -> Adicionar Bloco" << '\n';
+        << "[4] -> Adicionar Bloco" << '\n'
+        << "[5] -> Selecionar Bloco" << '\n';
         std::cin >> option;
         
         switch (option)
@@ -52,6 +54,14 @@ int main() {
             std::cout << "Novo bloco criado!\n\n";
             blockchain.newBlock();
             system("pause");
+            break;
+        case '5':
+            system("cls");
+            std::cout << "Digite o Index do bloco: ";
+            std::cin >> index;
+            blockchain.selectBlock(index);
+            system("pause");
+            break;
         default:
             break;
         }

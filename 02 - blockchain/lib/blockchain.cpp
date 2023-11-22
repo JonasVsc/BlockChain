@@ -94,3 +94,26 @@ void Blockchain::setTimestamp()
     actual->timestamp = std::time(0);
 }
 
+void Blockchain::selectBlock(int& index)
+{
+    Block* temp = new Block;
+    temp = genesis;
+
+    if(index > actual->index)
+    {
+        std::cout << "Nao existe o bloco indicado\n";
+        return;
+    }
+
+    while(true)
+    {
+        if(index == temp->index)
+        {
+            selected = temp;
+            break;
+        }
+        temp = temp->next;
+    }
+}
+
+

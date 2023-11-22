@@ -14,6 +14,7 @@ class Blockchain {
         void printBlockchain();
         void mine();
         void newBlock();
+        void selectBlock(int& index);
 
         Block* genesis;
         Block* actual;
