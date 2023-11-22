@@ -7,7 +7,9 @@ Blockchain::Blockchain()
     block->index = 0;
     block->nonce = 0;
     block->status = Invalido;
+    block->data = "";
     block->prevHash = "null";
+    block->link = nullptr;
     
     genesis = actual = block;
     setHash(actual->data);
@@ -31,9 +33,36 @@ void Blockchain::setHash(const std::string &d)
     actual->hash = sha256(d + std::to_string(actual->nonce));
 }
 
-void printBlockchain()
+void Blockchain::printBlockchain()
 {
+    Block* temp = new Block;
+    temp = genesis;
+    while(temp != nullptr)
+    {
+        std::cout
+        << "# [" << temp->index << "] " << "\n\n"
+        << "Nonce " << temp->nonce << " " << '\n'
+        << "Data: " << temp->data << "\n\n"
+        << "Hash: " << temp->hash << '\n'
+        << "PrevHash: " << temp->prevHash << "\n\n"
+        << "===========================================================================" << "\n\n";
+        temp = temp->link;
+    }
+    delete temp;
 
+}
+
+void Blockchain::newBlock()
+{
+    Block* block = new Block;
+    block->index = actual->index + 1;
+    block->nonce = 0;
+    block->status = Invalido;
+    block->data = "";
+    block->link = nullptr;
+    block->prevHash = actual->hash;
+    actual->link = block;
+    actual = block;
 }
 
 void Blockchain::mine()
@@ -56,9 +85,12 @@ void Blockchain::mine()
     }
     actual->nonce = nonce_;
     actual->hash = validHash;
+
+    newBlock();
 }
 
 void Blockchain::setTimestamp()
 {
     actual->timestamp = std::time(0);
 }
+

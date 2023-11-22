@@ -10,27 +10,8 @@ int main() {
 
     while(true)
     {
-        if(blockchain.actual->status == Invalido)
-        {
-            status = "Invalido"; 
-            nonce_time = "";
-        }
-        if(blockchain.actual->status == Valido)
-        {
-            status = "Valido";
-            timestamp = blockchain.actual->timestamp;
-            nonce_time = std::asctime(std::localtime(&timestamp));
-        }
 
-
-        std::cout
-        << "# [" << blockchain.actual->index << "] " << status << "\n\n"
-        << "Nonce " << blockchain.actual->nonce << " " << nonce_time << '\n'
-        << "Data: " << blockchain.actual->data << "\n\n"
-        << "Hash: " << blockchain.actual->hash << '\n'
-        << "PrevHash: " << blockchain.actual->prevHash << "\n\n"
-        << "===========================================================================" << "\n\n";
-
+        blockchain.printBlockchain();
 
         std::cout 
         << "[0] -> Sair" << '\n'
