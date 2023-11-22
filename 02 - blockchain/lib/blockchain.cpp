@@ -15,16 +15,18 @@ Blockchain::Blockchain()
     genesis = actual = selected = block;
 }
 
-std::string Blockchain::getGenesisTimestamp()
-{   
-    std::time_t timestamp = genesis->timestamp;
-    return (std::asctime(std::localtime(&timestamp)));
-}
-
 void Blockchain::setData(const std::string &d)
 {
+    Block* temp = new Block;
     selected->data = d;
-    selected->hash = sha256(selected->data + std::to_string(selected->nonce));
+    selected->hash = sha256(selected->data + std::to_string(selected->nonce) + std::to_string(selected->index) + (selected == genesis ? "" : selected->prev->hash));
+    temp = selected;
+    while(temp != nullptr)
+    {
+        temp->hash = sha256(temp->data + std::to_string(temp->nonce) + std::to_string(temp->index) + (temp == genesis ? "" : temp->prev->hash));
+        temp->status = Invalido;
+        temp = temp->next;
+    }
     selected->status = Invalido;
 }
 
@@ -36,10 +38,13 @@ void Blockchain::printBlockchain()
     {
         std::cout
         << "# [" << temp->index << "] " << '\n'
-        << "Nonce " << temp->nonce << " " << "\n\n"
+        << "===========================================================================" << '\n'
+        << "Status: " << (temp->status == Valido ? "Minerado" : "Nao Minerado") << '\n'
+        << "Nonce: " << temp->nonce << " " << "\n\n"
         << "Data: " << temp->data << "\n\n"
         << "Hash: " << temp->hash << '\n'
         << "PrevHash: " << (temp != genesis ? temp->prev->hash : "000000000000") << "\n\n"
+        << (temp->status == Valido ? std::asctime(std::localtime(&temp->timestamp)) : "") << '\n' // CONDIÇAO
         << "===========================================================================" << "\n\n";
         temp = temp->next;
     }
@@ -57,7 +62,6 @@ void Blockchain::newBlock()
     block->next = nullptr;
     block->prev = actual;
     block->hash = sha256(block->data + std::to_string(block->nonce) + std::to_string(block->index) + block->prev->hash);
-    block->prevHash = block->prev->hash;
     actual->next = block;
     actual = block;
 }
@@ -69,7 +73,8 @@ void Blockchain::mine()
 
     while(true)
     {
-        validHash = sha256(selected->data + std::to_string(nonce_) + std::to_string(selected->index) + (selected != genesis ? selected->prev->hash : ""));
+        selected->timestamp = std::time(0);
+        validHash = sha256(selected->data + std::to_string(nonce_) + std::to_string(selected->index) + (selected != genesis ? selected->prev->hash : "") + std::to_string(selected->timestamp));
         std::cout << validHash << '\n';
         int result = validHash.compare(0, 4, difficulty);
         if(result == 0)
@@ -109,6 +114,20 @@ void Blockchain::selectBlock(int& index)
         }
         temp = temp->next;
     }
+}
+
+void Blockchain::printSelected()
+{
+        std::cout
+        << "# [" << selected->index << "] " << '\n'
+        << "===========================================================================" << '\n'
+        << "Status: " << (selected->status == Valido ? "Minerado" : "Nao Minerado") << '\n'
+        << "Nonce: " << selected->nonce << " " << "\n\n"
+        << "Data: " << selected->data << "\n\n"
+        << "Hash: " << selected->hash << '\n'
+        << "PrevHash: " << (selected != genesis ? selected->prev->hash : "000000000000") << "\n\n"
+        << (selected->status == Valido ? std::asctime(std::localtime(&selected->timestamp)) : "") << '\n'
+        << "===========================================================================" << "\n\n";
 }
 
 

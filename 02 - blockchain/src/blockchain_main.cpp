@@ -12,13 +12,7 @@ int main() {
     while(true)
     {
 
-        std::cout
-        << "# [" << blockchain.selected->index << "] " << '\n'
-        << "Nonce " << blockchain.selected->nonce << " " << "\n\n"
-        << "Data: " << blockchain.selected->data << "\n\n"
-        << "Hash: " << blockchain.selected->hash << '\n'
-        << "PrevHash: " << (blockchain.selected != blockchain.genesis ? blockchain.selected->prev->hash : "000000000000") << "\n\n"
-        << "===========================================================================" << "\n\n";
+        blockchain.printSelected();
 
         std::cout 
         << "[0] -> Sair" << '\n'
