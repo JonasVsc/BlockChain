@@ -7,7 +7,7 @@ class Blockchain {
     public:
     Blockchain();
 
-    void addTransaction(Transaction& transaction);
+    void addTransaction();
 
     void listTransactions();
 
