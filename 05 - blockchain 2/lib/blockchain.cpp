@@ -25,13 +25,17 @@ void Blockchain::listTransactions()
 {
     for (const auto& transacao : atual->transactions) {
         std::cout 
+        << '\n' 
+        << '\n' 
         << "De: " << transacao.sender << '\n'
         << '\n'
         << "Para: " << transacao.receiver << '\n'
         << '\n'
         << "Quantia: " << transacao.amount << '\n'
-        << "======================================================================" << '\n'
-        << '\n' << '\n';
+        << '\n'
+        << '\n'
+        << "======================================================================" 
+        << '\n';
     }
 }
 

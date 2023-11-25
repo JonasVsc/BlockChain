@@ -9,8 +9,8 @@ int main()
 {
     Blockchain blockchain;
     Wallet* wallet = new Wallet[10];
-    std::string wallet_name;
-    int numWallet = 0;
+    std::string wallet_name, sender, receiver;
+    int numWallet = 0, amount;
     int index = 0, search_block_index = 0;
     char opt;
 
@@ -84,8 +84,8 @@ int main()
             << "[1] Voltar" << '\n'
             << '\n'
             << "----------------------------------------------------------------------" << '\n'
-            << '\n';
-            std::cout << ">";
+            << '\n'
+            << '>';
             std::cin >> opt;
 
             if(opt == '0')
@@ -112,12 +112,45 @@ int main()
 
         if(opt == '2')
         {
-            // De:
-            // Para:
-            // Quantia:
+            Transaction transaction;
+            system("cls");
+            std::cout << "De: ";
+            std::cin >> sender;
+            std::cout << '\n';
+            std::cout << "Para: ";
+            std::cin >> receiver;
+            std::cout << '\n';
+            std::cout << "Quantia: ";
+            std::cin >> amount;
 
-            //Confirmar
-            //S ou N
+            std::cout << "======================================================================" << '\n' << '\n';
+
+            
+
+            transaction.sender = sender;
+            transaction.receiver = receiver;
+            transaction.amount = amount;
+            while(opt != 's' && opt != 'n')
+            {
+                system("cls");
+                std::cout 
+                << "De: " << sender << '\n'
+                << '\n'
+                << "Para: " << receiver << '\n'
+                << '\n'
+                << "Quantia: " << amount << '\n'
+                << '\n' << '\n';
+                std::cout 
+                << "Confirmar Transacao? S/N" 
+                << '\n'
+                << '>';
+                std::cin >> opt;
+                if(opt == 's')
+                {
+                    blockchain.addTransaction(transaction);
+                }
+            }
+            
         }
 
         if(opt == '3')
