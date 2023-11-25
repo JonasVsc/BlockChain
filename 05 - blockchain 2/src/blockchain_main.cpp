@@ -58,13 +58,21 @@ int main()
             Block* temp = new Block;
             temp = blockchain.atual;
 
+            // aqui
 
-            
+            // Fazer um iterador tipo:
+            // while(temp->index != search_block_index)
+            // {
+            //     temp = temp->previous;
+            // }
 
+            // testar valores negativos, positivos e 0 para search_block_index
+
+            // tentar substituir o valor "00" por temp->index como teste
             system("cls");
             std::cout
             << "======================================================================" << '\n'
-            << "Bloco [" << "00" << "]" << '\n'
+            << "Bloco [" << "00" << "]" << '\n' // temp->index
             << '\n'
             << "Nonce # " << '\n'
             << '\n'
