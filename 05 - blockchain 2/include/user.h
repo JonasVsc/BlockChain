@@ -1,14 +1,15 @@
-#include<iostream>
+#pragma once
+
+class Wallet;
 
 class User {
 public:
-
+    User();
     virtual void listen();
     void transaction();
 
 
 private:
-    std::string privateKey;
-    std::string publicKey;
+    Wallet* wallet;
 
 };

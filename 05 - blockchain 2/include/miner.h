@@ -2,7 +2,7 @@
 
 class Miner : public User {
 public:
-    void listen() override;
+    Miner();
     
 private:
 

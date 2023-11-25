@@ -1,5 +1,6 @@
 #include<iostream>
 #include<ctime>
+#include"transaction.h"
 
 
 struct Block {
@@ -14,7 +15,7 @@ struct Block {
 
     struct Body {
         std::string merkleRoot;
-        std::string transaction;
+        Transaction* transactions;
     };
     
 };

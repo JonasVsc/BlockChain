@@ -1,7 +1,11 @@
-#include<ctime>
-#include"user.h"
+#pragma once
 
-enum status {rejected, pending, confirmed };
+#include<ctime>
+#include<iostream>
+
+class Wallet;
+
+enum Status {rejected, pending, confirmed };
 
 class Transaction {
 
@@ -9,15 +13,11 @@ class Transaction {
 
     private:
         float amount;
-        User sender;
-        User recipient;
+        Wallet* sender;
+        Wallet* recipient;
         std::string signature;
-        std::string hash;
         std::time_t timestamp;
+        std::string hash;
         float fee;
-        int status;
-        // Smart contract ?
-        // Transaction Version ?
-        
-
+        Status status;
 };
