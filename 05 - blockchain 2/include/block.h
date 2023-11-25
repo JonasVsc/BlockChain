@@ -1,21 +1,20 @@
 #include<iostream>
+#include <vector>
 #include<ctime>
 #include"transaction.h"
 
 
 struct Block {
-    Block* next;
+    Block* previous;
     
-    struct Head {
-        int nonce;
-        std::string previousBlockHash;
-        std::time_t timestamp;
+    //Header
+    int nonce, index;
+    std::string previousHash;
+    std::string hash;
+    std::time_t timestamp;
 
-    };
-
-    struct Body {
-        std::string merkleRoot;
-        Transaction* transactions;
-    };
+    //Body
+    std::string merkleRoot;
+    std::vector<Transaction> transactions;
     
 };

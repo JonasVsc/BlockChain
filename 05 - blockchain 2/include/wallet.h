@@ -11,9 +11,10 @@
 class Wallet {
     public:
         Wallet();
+        Wallet(std::string& name);
 
         void generateWalletKeys(std::string& privKey, std::string& publKey);
-
+        std::string name;
         std::string publicKey;
         std::string privateKey;
     private:

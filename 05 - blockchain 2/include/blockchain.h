@@ -6,8 +6,14 @@
 class Blockchain {
     public:
     Blockchain();
+
+    void addTransaction(Transaction& transaction);
+
+    void listTransactions();
+
+    
         
     Block* genesis;
-    private:
-
+    Block* atual;
 };
+

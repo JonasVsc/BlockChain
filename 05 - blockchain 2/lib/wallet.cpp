@@ -6,6 +6,13 @@ Wallet::Wallet()
 }
 
 
+Wallet::Wallet(std::string& name)
+    :name(name)
+{
+    generateWalletKeys(privateKey, publicKey);
+}
+
+
 
 
 void Wallet::generateWalletKeys(std::string& privKey, std::string& publKey)
