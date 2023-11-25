@@ -3,49 +3,87 @@
 
 #include"blockchain.h"
 #include"wallet.h"
-#include"miner.h"
+
 
 int main()
 {
     Blockchain blockchain;
-    char opt, role;
+    Crypto amount;
+    Sender sender;
+    Receiver receiver;
+    char opt;
 
-    do {
-        system("cls");
-        std::cout
-        << "[0] - Exit" << '\n'
-        << "[1] - Connect" << '\n';
-        std::cin >> opt;
-
-        if(opt == '0')
-        {
-            return 0;
-        }
-
-    } while(opt != '1');
-
-    while (true)
+    
+    while(true)
     {
         system("cls");
-        std::cout
-        << "0 -> User" << '\n'
-        << "1 -> Miner" << '\n';
-        std::cin >> role;
 
-        if(role == '0')
+        std::cout << "Thread [] Saldo: " << '\n' << '\n';
+
+        std::cout
+        << "[0] - Finalizar" << '\n'
+        << "[1] - Realizar Transacao" << '\n'
+        << "[2] - Historico de Transacoes da Conta" << '\n'
+        << "[3] - Buscar Transacao" << '\n'
+        << "[4] - Minerar" << '\n'
+        << "[5] - Criar Carteira" << '\n'
+        << "[6] - Criar Thread" << '\n'
+        << "[7] - Selecionar Thread" << '\n'
+        << "[8] - Listar Transacoes de um bloco" << '\n';
+        
+
+
+
+
+
+        std::cin >> opt;
+
+        
+        if(opt == '0')
         {
-            User user;
-            break;
+            exit(0);
         }
-        if(role == '1')
+
+        if(opt == '1')
         {
-            Miner miner;
-            break;
+            system("cls");
+
+            Transaction* transaction = new Transaction;
+
+            std::cout << "Transacao\n\n";
+            std::cout << "Quantia: ";
+            std::cin >> amount;
+
+            std::cout << "De: ";
+            std::cin >> sender;
+
+            std::cout << "Para: ";
+            std::cin >> receiver;
+            
+            system("cls");
+
+            std::cout 
+            << "Enviando" << amount << '\n'
+            << "De: " << sender << '\n'
+            << "Para: " << receiver;
+
+        }
+
+        if(opt == '5')
+        {
+            system("cls");
+            Wallet* wallet = new Wallet;
+            
+            std::cout
+            << "Nova carteira criada" << '\n' << '\n'
+            << "Chave Privada: \n" << wallet->privateKey << '\n' << '\n'
+            << "Chave Publica: \n" << wallet->publicKey << '\n' << '\n';
+
+            std::cout << "\nAnote suas chaves!\n\n";
+
+            system("pause");
         }
     }
 
-
-
-    system("pause");
     return 0;
 }

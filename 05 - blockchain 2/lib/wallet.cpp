@@ -5,15 +5,8 @@ Wallet::Wallet()
     generateWalletKeys(privateKey, publicKey);
 }
 
-void Wallet::setPublicKey(std::string pk)
-{
-    publicKey = pk;
-}
 
-void Wallet::setPrivateKey(std::string pk)
-{
-    privateKey = pk;
-}
+
 
 void Wallet::generateWalletKeys(std::string& privKey, std::string& publKey)
 {

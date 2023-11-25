@@ -12,10 +12,7 @@ class Wallet {
     public:
         Wallet();
 
-        void setPublicKey(std::string pk);
-        void setPrivateKey(std::string pk);
         void generateWalletKeys(std::string& privKey, std::string& publKey);
-
 
         std::string publicKey;
         std::string privateKey;
