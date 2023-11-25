@@ -133,7 +133,6 @@ int main()
             while(!(wallet[i].name.empty()))
             {
                 std::cout
-                << "======================================================================" << '\n'
                 << "Carteira " << wallet[i].name << '\n'
                 << '\n'
                 << "Chave Privada " << wallet[i].privateKey << '\n'
@@ -158,7 +157,6 @@ int main()
             delete temp;
             system("cls");
             std::cout 
-            << "======================================================================" << '\n'
             << "Carteira " << wallet[numWallet].name << '\n'
             << '\n'
             << "Chave Privada " << wallet[numWallet].privateKey << '\n'
