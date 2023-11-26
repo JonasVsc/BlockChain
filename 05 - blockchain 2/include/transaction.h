@@ -3,7 +3,7 @@
 
 typedef std::string Sender;
 typedef std::string Receiver;
-typedef int Crypto;
+typedef float Crypto;
 
 class Wallet;
 

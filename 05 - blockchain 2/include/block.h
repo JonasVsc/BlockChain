@@ -12,6 +12,7 @@ struct Block {
     std::string previousHash;
     std::string hash;
     std::time_t timestamp;
+    Crypto reward;
 
     //Body
     std::string merkleRoot;

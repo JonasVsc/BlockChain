@@ -7,6 +7,7 @@ Blockchain::Blockchain()
     block->index = 0;
     block->previousHash = "0000000000000000000000000000000000000000000000000000000000000000";
     block->nonce = 0;
+    block->reward = 250;
 
     block->hash = sha256((std::to_string(block->index) + std::to_string(block->nonce) + block->previousHash));
 
@@ -30,7 +31,23 @@ void Blockchain::mine(std::string& publKey)
         int result = validHash.compare(0, 4, "0000");
         if(result == 0)
         {
-            std::cout << validHash << '\n';
+            system("cls");
+            std::cout 
+            << "======================================================================" << '\n'
+            << "Nonce " << nonce << '\n'
+            << '\n'
+            << "Hash " << validHash << '\n'
+            << '\n'
+            << "O Nonce encontrado satisfez as condicoes e foi transmitido!" << '\n'
+            << '\n'
+            << "Um novo bloco foi gerado!" << '\n'
+            << '\n'
+            << "Foi enviado a recompensa de " << atual->reward << " cryptos para sua carteira" << '\n'
+            << '\n'
+            << "Chave Publica: " << publKey << '\n'
+            << '\n'
+            << "======================================================================" << '\n'
+            << '\n';
             system("pause");
             break;
         }
@@ -38,8 +55,10 @@ void Blockchain::mine(std::string& publKey)
     }
     atual->nonce = nonce;
     atual->hash = validHash;
-
+    newBlock();
 }
+
+
 
 //precisa adicionar verificações
 void Blockchain::addTransaction()
@@ -104,6 +123,22 @@ void Blockchain::listTransactions()
         << "======================================================================" 
         << '\n';
     }
+}
+
+
+void Blockchain::newBlock()
+{
+    Block* block = new Block;
+
+    block->index = atual->index + 1;
+    block->reward = atual->reward / 2;
+    block->nonce = 0;
+    block->previous = atual;
+
+    atual = block;
+    atual->previousHash = atual->previous->hash;
+    atual->hash = sha256((std::to_string(atual->index) + std::to_string(atual->nonce) + atual->previousHash));
+
 }
 
 

@@ -12,6 +12,8 @@ class Blockchain {
 
     void mine(std::string& publKey);
 
+    void newBlock();
+
     void listTransactions();
 
     

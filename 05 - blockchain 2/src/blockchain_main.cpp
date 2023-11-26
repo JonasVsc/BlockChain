@@ -74,7 +74,7 @@ int main()
 
             if(temp->index != search_block_index)
             {
-                std::cout << "Nao foi possivel acessar o bloco" << '\n';
+                std::cout << "Bloco nao existe" << '\n';
                 system("pause");
                 continue;
             }
@@ -91,7 +91,7 @@ int main()
             << '\n'
             << "Prev " << temp->previousHash << '\n'
             << '\n'
-            << "Recompensa " << "10" << '\n'
+            << "Recompensa " << temp->reward << '\n'
             << '\n'
             << "Transacoes " << temp->transactions.size() << '\n'
             << '\n'
