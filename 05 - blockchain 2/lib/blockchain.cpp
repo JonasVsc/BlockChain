@@ -56,6 +56,7 @@ void Blockchain::mine(std::string& publKey)
     atual->nonce = nonce;
     atual->hash = validHash;
     newBlock();
+    addTransaction(publKey, atual->previous->reward);
 }
 
 
@@ -105,6 +106,17 @@ void Blockchain::addTransaction()
             atual->transactions.push_back(transaction);
         }
     }
+}
+
+void Blockchain::addTransaction(std::string receiver, Crypto amount)
+{
+    Transaction transaction;
+
+    transaction.sender = "System";
+    transaction.receiver = receiver;
+    transaction.amount = amount;
+    
+    atual->transactions.push_back(transaction);
 }
 
 void Blockchain::listTransactions()

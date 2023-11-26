@@ -9,6 +9,7 @@ class Blockchain {
     Blockchain();
 
     void addTransaction();
+    void addTransaction(std::string receiver, Crypto amount);
 
     void mine(std::string& publKey);
 
