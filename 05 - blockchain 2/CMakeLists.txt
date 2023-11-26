@@ -9,6 +9,7 @@ add_library(blockchain_lib "./lib/blockchain.cpp")
 
 
 target_link_libraries(signatures_lib ssl crypto)
+target_link_libraries(blockchain_lib signatures_lib)
 
 
 

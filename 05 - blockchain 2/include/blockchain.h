@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
 #include"block.h"
+#include"signatures.h"
 
 
 class Blockchain {
@@ -8,6 +9,8 @@ class Blockchain {
     Blockchain();
 
     void addTransaction();
+
+    void mine(std::string& publKey);
 
     void listTransactions();
 

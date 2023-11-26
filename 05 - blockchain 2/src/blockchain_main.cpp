@@ -20,9 +20,9 @@ int main()
         
         std::cout
         << "======================================================================" << '\n'
-        << "Bloco Atual [" << "00" << ']' << '\n'
+        << "Bloco Atual [" << blockchain.atual->index << ']' << '\n'
         << '\n'
-        << "Nonce # " << '\n'
+        << "Nonce " << blockchain.atual->nonce << '\n'
         << "======================================================================" << '\n'
         << '\n'
         << "[0] Detalhes de um bloco" << '\n'
@@ -117,7 +117,11 @@ int main()
 
         if(opt == '3')
         {
-            // Indicar a chave publica usada na mineração
+            std::cout << "Chave Publica: ";
+            std::cin >> sender;
+
+            system("cls");
+            blockchain.mine(sender);
         }
 
         if(opt == '4')

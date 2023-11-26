@@ -7,10 +7,37 @@ Blockchain::Blockchain()
     Block* block = new Block;
     block->index = 0;
     block->previousHash = "";
+    block->nonce = 0;
 
     //hash =  ( blockIndex, merkleRoot, nonce, previousHash)
     genesis = atual = block;
-    delete block;
+}
+
+
+//Há um bug que bad_alloc, não sei o por que, identificar dps
+void Blockchain::mine(std::string& publKey)
+{
+    unsigned int nonce = 0;
+    std::string validHash;
+    std::string blockHeader;
+    
+    std::cout << "Mining..." << '\n' << '\n';
+    while(true)
+    {
+        blockHeader = (std::to_string(atual->index) + std::to_string(nonce) + atual->previousHash + atual->hash);
+        validHash = sha256((blockHeader + atual->merkleRoot));
+        int result = validHash.compare(0, 4, "0000");
+        if(result == 0)
+        {
+            std::cout << validHash << '\n';
+            system("pause");
+            break;
+        }
+        nonce++;
+    }
+    atual->nonce = nonce;
+    atual->hash = validHash;
+
 }
 
 //precisa adicionar verificações
