@@ -22,6 +22,10 @@ int main()
         << "======================================================================" << '\n'
         << "Bloco Atual [" << blockchain.atual->index << ']' << '\n'
         << '\n'
+        << "Hash " << blockchain.atual->hash << '\n'
+        << '\n'
+        << "Prev " << blockchain.atual->previousHash << '\n'
+        << '\n'
         << "Nonce " << blockchain.atual->nonce << '\n'
         << "======================================================================" << '\n'
         << '\n'
@@ -49,8 +53,12 @@ int main()
         if(opt == '0')
         {
             system("cls");
-
-            std::cout << "Index Bloco: ";
+            std::cout
+            << "======================================================================" << '\n'
+            << "Numero de Blocos " << blockchain.atual->index + 1 << '\n'
+            << "======================================================================" << '\n'
+            << '\n'
+            << "Index Bloco: ";
             std::cin >> search_block_index;
 
             system("cls");
@@ -58,23 +66,34 @@ int main()
             Block* temp = new Block;
             temp = blockchain.atual;
 
-            // aqui
 
-            // Fazer um iterador tipo:
-            // while(temp->index != search_block_index)
-            // {
-            //     temp = temp->previous;
-            // }
+            while(temp->index > search_block_index && search_block_index >= 0)
+            {
+                temp = temp->previous;
+            }
 
-            // testar valores negativos, positivos e 0 para search_block_index
+            if(temp->index != search_block_index)
+            {
+                std::cout << "Nao foi possivel acessar o bloco" << '\n';
+                system("pause");
+                continue;
+            }
 
-            // tentar substituir o valor "00" por temp->index como teste
+
             system("cls");
             std::cout
             << "======================================================================" << '\n'
-            << "Bloco [" << "00" << "]" << '\n' // temp->index
+            << "Bloco [" << temp->index << "]" << '\n'
             << '\n'
-            << "Nonce # " << '\n'
+            << "Nonce " << temp->nonce << '\n'
+            << '\n'
+            << "Hash " << temp->hash << '\n'
+            << '\n'
+            << "Prev " << temp->previousHash << '\n'
+            << '\n'
+            << "Recompensa " << "10" << '\n'
+            << '\n'
+            << "Transacoes " << temp->transactions.size() << '\n'
             << '\n'
             << "======================================================================" << '\n'
             << '\n'
@@ -103,11 +122,12 @@ int main()
 
         if(opt == '1')
         {
-            //Index Bloco
-            // Detalhes do bloco
+            system("cls");
+            std::cout << "Hash Transacao: ";
+            std::cin >> sender;
 
-            // [0] Mostrar Livro razao
-            // [1] Voltar
+            system("cls");
+            system("pause");
         }
 
         if(opt == '2')

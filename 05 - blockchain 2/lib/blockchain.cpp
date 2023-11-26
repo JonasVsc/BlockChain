@@ -1,13 +1,14 @@
 #include"blockchain.h"
 
 
-
 Blockchain::Blockchain()
 {
     Block* block = new Block;
     block->index = 0;
-    block->previousHash = "";
+    block->previousHash = "0000000000000000000000000000000000000000000000000000000000000000";
     block->nonce = 0;
+
+    block->hash = sha256((std::to_string(block->index) + std::to_string(block->nonce) + block->previousHash));
 
     //hash =  ( blockIndex, merkleRoot, nonce, previousHash)
     genesis = atual = block;
