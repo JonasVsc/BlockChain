@@ -8,14 +8,14 @@ class Blockchain {
     public:
     Blockchain();
 
-    void addTransaction();
-    void addTransaction(std::string receiver, Crypto amount);
+    void addTransaction() const;
+    void addTransaction(const std::string& receiver, const Crypto& amount) const;
 
-    void mine(std::string& publKey);
+    void mine(const std::string& publKey);
 
     void newBlock();
 
-    void listTransactions();
+    void listTransactions(const std::vector<Transaction>& transactions) const;
 
     
         

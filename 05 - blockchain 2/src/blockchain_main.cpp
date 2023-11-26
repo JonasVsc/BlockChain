@@ -110,7 +110,7 @@ int main()
             if(opt == '0')
             {
                 system("cls");
-                blockchain.listTransactions();
+                blockchain.listTransactions(temp->transactions);
                 system("pause");
 
             }

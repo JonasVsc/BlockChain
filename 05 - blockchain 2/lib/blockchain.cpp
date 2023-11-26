@@ -16,8 +16,7 @@ Blockchain::Blockchain()
 }
 
 
-//Há um bug que bad_alloc, não sei o por que, identificar dps
-void Blockchain::mine(std::string& publKey)
+void Blockchain::mine(const std::string& publKey)
 {
     unsigned int nonce = 0;
     std::string validHash;
@@ -62,7 +61,7 @@ void Blockchain::mine(std::string& publKey)
 
 
 //precisa adicionar verificações
-void Blockchain::addTransaction()
+void Blockchain::addTransaction() const
 {
     Transaction transaction;
     std::string sender, receiver;
@@ -108,7 +107,7 @@ void Blockchain::addTransaction()
     }
 }
 
-void Blockchain::addTransaction(std::string receiver, Crypto amount)
+void Blockchain::addTransaction(const std::string& receiver, const Crypto& amount) const
 {
     Transaction transaction;
 
@@ -119,9 +118,9 @@ void Blockchain::addTransaction(std::string receiver, Crypto amount)
     atual->transactions.push_back(transaction);
 }
 
-void Blockchain::listTransactions()
+void Blockchain::listTransactions(const std::vector<Transaction>& transactions) const
 {
-    for (const auto& transacao : atual->transactions) {
+    for (const auto& transacao : transactions) {
         std::cout 
         << '\n' 
         << '\n' 
