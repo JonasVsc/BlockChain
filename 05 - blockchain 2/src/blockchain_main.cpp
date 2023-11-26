@@ -137,7 +137,13 @@ int main()
 
         if(opt == '3')
         {
-            std::cout << "Chave Publica: ";
+            system("cls");
+            std::cout 
+            << "======================================================================" << '\n'
+            << "Insira uma chave valida" << '\n'
+            << "======================================================================" << '\n'
+            << '\n'
+            << "Chave Publica: ";
             std::cin >> sender;
 
             system("cls");
