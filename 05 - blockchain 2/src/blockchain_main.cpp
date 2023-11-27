@@ -31,8 +31,6 @@ int main()
         << '\n'
         << "[0] Detalhes de um bloco" << '\n'
         << '\n'
-        << "[1] Detalhes de uma transacao" << '\n'
-        << '\n'
         << "----------------------------------------------------------------------" << '\n'
         << '\n'
         << "[2] Fazer uma transacao" << '\n'
@@ -83,6 +81,7 @@ int main()
             system("cls");
             std::cout
             << "======================================================================" << '\n'
+            << (temp->status ? (std::asctime(std::localtime(&temp->timestamp))) : "") << '\n' 
             << "Bloco [" << temp->index << "]" << '\n'
             << '\n'
             << "Nonce " << temp->nonce << '\n'
@@ -96,7 +95,6 @@ int main()
             << "Transacoes " << temp->transactions.size() << '\n'
             << '\n'
             << "======================================================================" << '\n'
-            << '\n'
             << '\n'
             << "[0] Listar Transacoes" << '\n'
             << '\n'

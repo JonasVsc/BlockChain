@@ -8,6 +8,8 @@ Blockchain::Blockchain()
     block->previousHash = "0000000000000000000000000000000000000000000000000000000000000000";
     block->nonce = 0;
     block->reward = 250;
+    block->status = Invalido;
+    block->timestamp = 0;
 
     block->hash = sha256((std::to_string(block->index) + std::to_string(block->nonce) + block->previousHash));
 
@@ -26,13 +28,16 @@ void Blockchain::mine(const std::string& publKey)
     while(true)
     {
         blockHeader = (std::to_string(atual->index) + std::to_string(nonce) + atual->previousHash + atual->hash);
-        validHash = sha256((blockHeader + atual->merkleRoot));
+        validHash = sha256((blockHeader));
         int result = validHash.compare(0, 4, "0000");
         if(result == 0)
         {
+            atual->status = Valido;
+            atual->timestamp = std::time(0);
             system("cls");
             std::cout 
             << "======================================================================" << '\n'
+            << std::asctime(std::localtime(&atual->timestamp)) << '\n'
             << "Nonce " << nonce << '\n'
             << '\n'
             << "Hash " << validHash << '\n'
@@ -144,6 +149,8 @@ void Blockchain::newBlock()
     block->index = atual->index + 1;
     block->reward = atual->reward / 2;
     block->nonce = 0;
+    block->status = Invalido;
+    block->timestamp = 0;
     block->previous = atual;
 
     atual = block;

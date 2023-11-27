@@ -1,8 +1,7 @@
 #include<ctime>
 #include<iostream>
 
-typedef std::string Sender;
-typedef std::string Receiver;
+typedef std::string Sender, Receiver;
 typedef float Crypto;
 
 enum Status {rejected, pending, confirmed };
@@ -12,5 +11,4 @@ struct Transaction {
     Sender sender;
     Receiver receiver;
     Crypto amount;
-    std::string signature;
 };
