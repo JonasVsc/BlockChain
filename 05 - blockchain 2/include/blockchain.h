@@ -5,22 +5,15 @@
 
 
 class Blockchain {
-    
-    public:
+public:
     Blockchain();
-
-    void addTransaction() const;
+    void addTransaction();
     void addTransaction(const std::string& receiver, const Crypto& amount) const;
-
     void mine(const std::string& publKey);
-
     void newBlock();
-
     void listTransactions(const std::vector<Transaction>& transactions) const;
-
-    
+    void recalculateHash();
         
     Block* genesis;
     Block* atual;
 };
-

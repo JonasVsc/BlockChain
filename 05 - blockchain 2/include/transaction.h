@@ -1,5 +1,6 @@
-#include<ctime>
 #include<iostream>
+#include<string>
+#include<ctime>
 
 typedef std::string Sender, Receiver;
 typedef float Crypto;
@@ -11,4 +12,5 @@ struct Transaction {
     Sender sender;
     Receiver receiver;
     Crypto amount;
+
 };

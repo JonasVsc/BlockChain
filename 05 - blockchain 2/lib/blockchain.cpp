@@ -1,19 +1,27 @@
 #include"blockchain.h"
 
+std::string transactions_tostring(const std::vector<Transaction>& transactions)
+{
+    std::string result;
+    for (const auto& transaction : transactions) 
+    {
+        result += transaction.sender + transaction.receiver + std::to_string(transaction.amount);
+    }
+    return result;
+}
 
 Blockchain::Blockchain()
 {
     Block* block = new Block;
     block->index = 0;
-    block->previousHash = "0000000000000000000000000000000000000000000000000000000000000000";
+    std::string genesis_prev(64, '0');
+    block->previousHash = genesis_prev;
     block->nonce = 0;
     block->reward = 250;
     block->status = Invalido;
     block->timestamp = 0;
+    block->hash = sha256((std::to_string(block->index) + std::to_string(block->nonce) + block->previousHash + transactions_tostring(block->transactions)));
 
-    block->hash = sha256((std::to_string(block->index) + std::to_string(block->nonce) + block->previousHash));
-
-    //hash =  ( blockIndex, merkleRoot, nonce, previousHash)
     genesis = atual = block;
 }
 
@@ -66,7 +74,7 @@ void Blockchain::mine(const std::string& publKey)
 
 
 //precisa adicionar verificações
-void Blockchain::addTransaction() const
+void Blockchain::addTransaction()
 {
     Transaction transaction;
     std::string sender, receiver;
@@ -108,6 +116,7 @@ void Blockchain::addTransaction() const
         if(opt == 's')
         {
             atual->transactions.push_back(transaction);
+            recalculateHash();
         }
     }
 }
@@ -121,6 +130,11 @@ void Blockchain::addTransaction(const std::string& receiver, const Crypto& amoun
     transaction.amount = amount;
     
     atual->transactions.push_back(transaction);
+}
+
+void Blockchain::recalculateHash()
+{
+    atual->hash = sha256((std::to_string(atual->index) + std::to_string(atual->nonce) + atual->previousHash + transactions_tostring(atual->transactions)));
 }
 
 void Blockchain::listTransactions(const std::vector<Transaction>& transactions) const
@@ -158,7 +172,4 @@ void Blockchain::newBlock()
     atual->hash = sha256((std::to_string(atual->index) + std::to_string(atual->nonce) + atual->previousHash));
 
 }
-
-
-
 

@@ -5,6 +5,8 @@
 #include"wallet.h"
 #include"signatures.h"
 
+
+
 int main()
 {
     Blockchain blockchain;
@@ -13,6 +15,7 @@ int main()
     int numWallet = 0, amount;
     int index = 0, search_block_index = 0;
     char opt;
+
 
     while(true)
     {
